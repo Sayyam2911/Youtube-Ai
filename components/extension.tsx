@@ -2,6 +2,8 @@ import {Collapsible} from "../@/components/ui/collapsible";
 import {useExtension} from "../contexts/extension-context";
 import {useEffect} from "react";
 import {getVideoData} from "../utils/functions";
+import ExtensionActions from "./extension-action";
+import {Button} from "../@/components/ui/button";
 
 export default function Extension(){
     const {
@@ -54,7 +56,7 @@ export default function Extension(){
       <main ref = {setExtensionContainer} className={`antialiased w-full mb-3 z-10 ${extensionTheme}`}>
         <div className={'w-full'}>
             <Collapsible open= {extensionOpen} onOpenChange={setExtensionOpen} className={'space-y-3'}>
-                <p>Extension Page</p>
+                <ExtensionActions />
             </Collapsible>
         </div>
       </main>

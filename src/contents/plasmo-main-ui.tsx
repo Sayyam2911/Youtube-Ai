@@ -1,13 +1,12 @@
-import type { PlasmoCSConfig } from "plasmo"
-import type { PlasmoGetInlineAnchor, PlasmoGetShadowHostId } from "plasmo";
-import cssText from "data-text:~style.css"
 import Extension from "../../components/extension";
 import Providers from "../../components/provider";
+import cssText from "data-text:~style.css"
+import type { PlasmoCSConfig, PlasmoGetInlineAnchor } from "plasmo"
 
 const INJECTED_ELEMENT_ID = "#secondary.style-scope.ytd-watch-flexy"
 
 export const getStyle = () => {
-  const baseFontSize = 12;
+  const baseFontSize = 12
   let updatedCssText = cssText.replaceAll(":root", ":host(plasmo-csui)")
   const remRegex = /([\d.]+)rem/g
   updatedCssText = updatedCssText.replace(remRegex, (match, remValue) => {
@@ -28,9 +27,9 @@ export const getInlineAnchor: PlasmoGetInlineAnchor = async () => ({
   insertPosition: "afterbegin"
 })
 
-export const getShadowHostId: PlasmoGetShadowHostId = () => `plasmo-inline`
+export const getShadowHostId = () => "plasmo-inline"
 
-function PlasmoMainUI(){
+function PlasmoMainUI() {
   return (
       <Providers>
         <Extension />
