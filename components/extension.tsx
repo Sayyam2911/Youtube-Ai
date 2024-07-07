@@ -1,9 +1,10 @@
-import {Collapsible} from "../@/components/ui/collapsible";
+import {Collapsible, CollapsibleContent} from "../@/components/ui/collapsible";
 import {useExtension} from "../contexts/extension-context";
 import {useEffect} from "react";
 import {getVideoData} from "../utils/functions";
 import ExtensionActions from "./extension-action";
 import {Button} from "../@/components/ui/button";
+import ExtensionPanels from "./extension-panel";
 
 export default function Extension(){
     const {
@@ -57,6 +58,9 @@ export default function Extension(){
         <div className={'w-full'}>
             <Collapsible open= {extensionOpen} onOpenChange={setExtensionOpen} className={'space-y-3'}>
                 <ExtensionActions />
+                <CollapsibleContent className="w-full h-fit max-h-[500px] border border-zinc-400 rounded-md overflow-auto">
+                    <ExtensionPanels/>
+                </CollapsibleContent>
             </Collapsible>
         </div>
       </main>
