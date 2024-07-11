@@ -54,7 +54,7 @@ export default function SummaryActions(){
 
                 <TooltipWrapper text={"Copy Summary"}>
                     <Button variant="outline" size="icon" onClick = {CopySummary} disabled={summaryIsGenerating} className="rounded-none focus:z-10 bg-transparent space-x-2 text-base border-zinc-700 flex items-center p-2">
-                        {isCopied ? <CheckIcon className="h-4.5 w-4.5"/> : (<ClipboardCopyIcon className="h-4.5 w-4.5"/>)}
+                        {isCopied ? <CheckIcon className="h-4 w-4"/> : (<ClipboardCopyIcon className="h-4.5 w-4.5"/>)}
                     </Button>
                 </TooltipWrapper>
 

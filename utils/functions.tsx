@@ -52,3 +52,35 @@ export async function getVideoData(id: string){
         else return {metadata, transcript : null};
     }
 }
+
+export function cleanJsonTranscript(transcript: any){
+    const chunks = []
+    let currentChunk = ""
+    let currentStartTime = transcript.events[0].tStartMs
+    let currentEndTime = currentStartTime
+
+    transcript.events.forEach((event : any) => {
+        event.segs?.forEach((seg) => {
+            const segmentText = seg.utf8.replace(/\n/g, " ");
+            currentEndTime = event.tStartMs + (seg.tOffsetMs || 0)
+            if((currentChunk + segmentText).length > 300){
+                chunks.push({text: currentChunk.trim(),
+                    startTime: currentStartTime,
+                    endTime: currentEndTime})
+                currentChunk = segmentText
+                currentStartTime = currentEndTime
+            }
+            else {
+                currentChunk += segmentText
+            }
+        })
+    })
+
+    if(currentChunk.length > 0){
+        chunks.push({text: currentChunk.trim(),
+            startTime: currentStartTime,
+            endTime: currentEndTime})
+    }
+
+    return chunks;
+}
