@@ -1,7 +1,7 @@
-import {type Model, models, type Prompt, prompts} from '../utils/constants';
+import {type Model, models, type Prompt, prompts} from '@/utils/constants';
 import {createContext, useContext, useEffect, useState} from 'react';
-import {usePort} from "@plasmohq/messaging/dist/hook";
 import React from "react";
+import generateCompletion from "~background/ports/completion";
 import {useExtension} from "./extension-context";
 
 interface SummaryContextInterface {
@@ -15,7 +15,7 @@ interface SummaryContextInterface {
     setSummaryIsError : (isError : boolean) => void,
     summaryIsGenerating : boolean,
     setSummaryIsGenerating : (isGenerating : boolean) => void,
-    generateSummary : (e: any) => void,
+    generateSummary : (e: any) => void
 }
 
 const SummaryContext = createContext<SummaryContextInterface | undefined>(undefined);
@@ -39,9 +39,15 @@ export function SummaryProvider({children} : SummaryProvideProps) {
     const [summaryIsError, setSummaryIsError] = useState<boolean>(false);
     const [summaryIsGenerating, setSummaryIsGenerating] = useState<boolean>(false);
 
-    const port = usePort("completion")
+const {extensionData, extensionLoading} = useExtension()
+    const summaryGenerate = {
+        message: undefined,
+        error: false,
+    }
 
-    const {extensionData, extensionLoading} = useExtension()
+    function delay(ms: number) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
 
     async function generateSummary(e: any) {
         e.preventDefault();
@@ -50,11 +56,25 @@ export function SummaryProvider({children} : SummaryProvideProps) {
         }
         setSummaryIsGenerating(true)
         setSummaryIsError(false)
-        port.send({
-            prompts : summaryPrompt.content,
-            model : summaryModel.content,
-            context : extensionData
-        })
+        try{
+            const response = await generateCompletion(summaryModel.content, summaryPrompt.content, extensionData)
+            let summaryContent = ""
+            for(let i=0; i<response.message.length; i++){
+                await delay(10);
+                summaryContent += response.message[i]
+                setSummaryContent(summaryContent)
+            }
+            setSummaryIsGenerating(false)
+            setSummaryIsError(false)
+        }
+        catch(e){
+            setSummaryIsError(true)
+            setSummaryIsGenerating(false)
+            setSummaryContent(null);
+            console.log("Error Recieved at Summary Context",e);
+        }
+        //const summaryGenerate = generateCompletion(summaryModel.content, summaryPrompt.content, extensionData).then((response) => {console.log("response",response)})
+        console.log("Port Send Request Completed")
     }
 
     useEffect(() => {

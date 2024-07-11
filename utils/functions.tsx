@@ -45,6 +45,8 @@ export async function getVideoData(id: string){
             tracks.sort(compareTracks);
             const transcriptResponse = await fetch(tracks[0].baseUrl + "&fmt=json3");
             const transcript = await transcriptResponse.json();
+            console.log("Transcript: ", transcript)
+            console.log("Metadata: ", metadata)
             return {metadata,transcript};
         }
         else return {metadata, transcript : null};

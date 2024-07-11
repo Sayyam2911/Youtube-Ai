@@ -1,4 +1,4 @@
-import {ChatBubbleIcon} from "@radix-ui/react-icons";
+import {BarChartIcon, ChatBubbleIcon} from "@radix-ui/react-icons";
 
 export type Model = {
     value : string,
@@ -17,14 +17,14 @@ export const models : Model[] = [
     {
         value : "default",
         label : "Gemini-1.5 Pro",
-        content : "gemini-1.5-pro",
-        icon : <ChatBubbleIcon className={'h-4 w-4 opacity-70'}/>
+        content : `gemini-1.5-pro`,
+        icon : <BarChartIcon className={'h-4 w-4 opacity-70'}/>
     },
     {
         value : "Gemini-1.5 Flash",
         label : "Gemini-1.5 Flash",
-        content : "gemini-1.5-flash",
-        icon : <ChatBubbleIcon className={'h-4 w-4 opacity-70'}/>
+        content : `gemini-1.5-flash`,
+        icon : <BarChartIcon className={'h-4 w-4 opacity-70'}/>
     }
 ]
 
