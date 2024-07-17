@@ -22,19 +22,17 @@ export default function TranscriptAction({jumpCurrentTime} : TranscriptActionPro
     function CopyTranscript(){
         if(isCopied || !extensionData.transcript) return
         const processed = cleanTextTranscript(extensionData.transcript)
+        console.log(processed)
         copyToClipboard(processed)
     }
 
-    console.log("This is the checkpoint")
-    console.log(extensionLoading)
-    console.log(transcriptJSON.length)
     return <div className="flex flex-row w-full justify-between items-center sticky top-0 z-10 bg-white pt-3.5 pb-3 px-3 space-x-4 dark:bg-[#0f0f0f]">
         <div className="relative w-full dark:bg-[#0f0f0f] dark:text-white">
             <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 dark:text-white"/>
             <Input
                 type="text"
                 placeholder="Search Transcript"
-                className="w-full h-12 rounded-none bg-transparent text-base border-zinc-700 flex items-center pl-8
+                className="w-full h-12 focus:z-10 rounded-none bg-transparent text-base border-zinc-700 flex items-center pl-8
                            focus:outline-none focus:ring-0 focus:border-zinc-700
                            dark:focus:border-zinc-700 dark:focus:ring-0 dark:focus:ring-offset-0"
                 onChange={(e) => {

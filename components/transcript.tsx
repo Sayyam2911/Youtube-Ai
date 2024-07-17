@@ -1,5 +1,6 @@
 import { useRef } from "react"
 import TranscriptAction from "@/components/transcript-action"
+import TranscriptContent from "@/components/transcript-content";
 
 export default function Transcript() {
     const player = document.querySelector("video")
@@ -45,6 +46,7 @@ export default function Transcript() {
     return (
         <>
             <TranscriptAction jumpCurrentTime={jumpCurrentTime} />
+            <TranscriptContent ref={transcriptListRef}/>
         </>
     )
 }

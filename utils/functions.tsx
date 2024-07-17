@@ -86,28 +86,33 @@ export function cleanJsonTranscript(transcript: any){
 }
 
 export function cleanTextTranscript(transcript : any){
-    let textLine = [];
+    let textLines = [];
     let tempText = ""
     let lastTime = 0
 
-    transcript.forEach((event) => {
-        if(event.segs){
-            event.segs.forEach((seg) => {
-                const segmentStartTimeMs = event.startMs + (seg.tOffsetMs || 0)
-                if(tempText && (segmentStartTimeMs - lastTime > 1000 || seg.utf8==="\n")){
-                    const timeFormatted = new Date(lastTime).toISOString().substr(11,12)
-                    textLine.push(`${timeFormatted} : ${tempText.trim()}`)
+    transcript.events.forEach((event) => {
+        if (event.segs) {
+            event.segs?.forEach((seg) => {
+                const segmentStartTimeMs = event.tStartMs + (seg.tOffsetMs || 0)
+
+                if (
+                    tempText &&
+                    (segmentStartTimeMs - lastTime > 1000 || seg.utf8 === "\n")
+                ) {
+                    const timeFormatted = new Date(lastTime).toISOString().substr(11, 12)
+                    textLines.push(`${timeFormatted}: ${tempText.trim()}`)
                     tempText = ""
                 }
 
-                lastTime = segmentStartTimeMs;
+                lastTime = segmentStartTimeMs
                 tempText += seg.utf8
             })
         }
     })
-    if(tempText){
-        const timeFormatted = new Date(lastTime).toISOString().substr(11,12)
-        textLine.push(`${timeFormatted} : ${tempText.trim()}`)
+
+    if (tempText) {
+        const timeFormatted = new Date(lastTime).toISOString().substr(11, 12)
+        textLines.push(`${timeFormatted}: ${tempText.trim()}`)
     }
-    return textLine.join("\n");
+    return textLines.join("\n")
 }

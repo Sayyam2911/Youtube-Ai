@@ -29,7 +29,7 @@ export function TranscriptProvider({children} : TranscriptProviderProps) {
     const {extensionLoading,extensionData} = useExtension()
 
     const transcriptJSON = React.useMemo(() => {
-        if(!extensionData && extensionData && extensionData.transcript){
+        if(!extensionLoading && extensionData && extensionData.transcript){
             return cleanJsonTranscript(extensionData.transcript)
         }
         return []
