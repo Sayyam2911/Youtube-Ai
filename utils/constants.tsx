@@ -73,5 +73,4 @@ export type Transcript = {
     text : string,
     startTime : number,
     endTime : number
-
 }

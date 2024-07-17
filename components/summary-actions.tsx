@@ -27,7 +27,7 @@ export default function SummaryActions(){
     }
 
     return (
-        <div className="flex flex-row w-full justify-between items-center sticky top-0 z-10 bg-white pt-2.5 pb-2 px-3">
+        <div className="flex flex-row w-full justify-between items-center sticky top-0 z-10 bg-white pt-2.5 pb-2 px-3 dark:bg-[#0f0f0f] dark:text-white">
             <Select value={summaryModel.value} onValueChange={(value) => setSummaryModel(models.find((model) => model.value === value))} >
             <SelectTrigger className={"w-fit space-x-3 rounded-none focus:z-10 bg-transparent text-base border-zinc-700 flex items-center p-2"}>
                 <SelectValue placeholder={"Model"} />
