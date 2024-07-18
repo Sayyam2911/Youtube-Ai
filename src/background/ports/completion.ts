@@ -1,9 +1,7 @@
-// @ts-ignore
 import {GoogleGenerativeAI} from "@google/generative-ai";
 const genAI = new GoogleGenerativeAI("AIzaSyDr47xqvHXeipm2WwsSMCOxD4d4GaiNDFU");
 
 async function createCompletion(model: string, prompt: string, context: any) {
-    console.log("Creating completion")
     const model1 = genAI.getGenerativeModel({ model: model});
     const parsed = context.transcript.events
         .filter((x: { segs: any }) => x.segs)
@@ -26,7 +24,6 @@ async function generateCompletion(model: string, prompt: string, context: any) {
         const completion = await createCompletion(model, prompt, context)
         console.log("Completion", completion)
         return {message : completion, error : false}
-
     }
     catch(e){
         return {message : "Getting Error from Gemini Summary Completion", error : true}

@@ -4,12 +4,6 @@ import Markdown from "@/components/markdown";
 
 export default function SummaryContent(){
     const {summaryContent, summaryIsGenerating, generateSummary} = useSummary()
-    if(summaryIsGenerating){
-        console.log("Generating")
-    }
-    if(summaryContent){
-        console.log("Content")
-    }
     if(!summaryContent && summaryIsGenerating){
         return (
             <div className={"flex justify-center items-center w-full p-3 bg-white dark:bg-[#0f0f0f]"}>

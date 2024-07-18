@@ -74,3 +74,8 @@ export type Transcript = {
     startTime : number,
     endTime : number
 }
+
+export type Message = {
+    role : string,
+    content : string,
+}

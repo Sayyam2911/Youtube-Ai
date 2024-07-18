@@ -18,7 +18,7 @@ function TranscriptList({transcript,searchInput}: TranscriptListProps){
     },[transcript,searchInput])
 
     if(filteredTranscripts.length === 0){
-        return (<div className={"flex justify-center items-center w-full h-32"}>
+        return (<div className={"flex justify-center items-center w-full h-32 dark:text-white"}>
             <span className={"text-[12px]"}>No Results Found</span>
         </div>)
     }

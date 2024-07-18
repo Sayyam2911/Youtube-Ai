@@ -49,7 +49,7 @@ function TranscriptItem({item,searchInput}: TranscriptItemProps){
 
     return (<div data-start-time={item.startTime} data-end-time={item.endTime} className={'flex flex-col w-full justify-between items-center p-3 border-[0.5px] border-zinc-300 space-y-4 group'}>
         <div className={"w-full flex flex-row items-center justify-between"}>
-            <Button variant={'outline'} className={'rounded-none bg-transparent space-x-2 text-base border-zinc-400 flex items-center p-2 dark:bg-transparent'} onClick={JumpToTime}>
+            <Button variant={'outline'} className={'rounded-none bg-transparent space-x-2 text-base border-zinc-400 flex items-center p-2 dark:bg-transparent dark:text-white'} onClick={JumpToTime}>
                 <ClockIcon className={'h-4 w-4'} />
                 <span className={'text-blue-500 text-[11.5px] hover:cursor-pointer hover:underline'}>
                     {startTime} : {endTime}
@@ -58,7 +58,7 @@ function TranscriptItem({item,searchInput}: TranscriptItemProps){
 
             <div className={"opacity-0 group-hover:opacity-100 transition-opacity duration-300 "}>
                 <TooltipWrapper text={'Copy Section'}>
-                    <Button variant={'outline'} size={'icon'} onClick={copySection} className={'rounded-none bg-transparent space-x-2 text-base border-zinc-700 flex items-center p-2'}>
+                    <Button variant={'outline'} size={'icon'} onClick={copySection} className={'rounded-none bg-transparent space-x-2 text-base border-zinc-700 flex items-center p-2 dark:text-white'}>
                         {isCopied ? (<CheckIcon className={'h-4.5 w-4.5'}/>):(
                             <ClipboardCopyIcon className={'h-4.5 w-4.5'}/>
                         )}
@@ -66,7 +66,7 @@ function TranscriptItem({item,searchInput}: TranscriptItemProps){
                 </TooltipWrapper>
             </div>
         </div>
-        <p className={"text-[11.5px] capitalize leading-7"}>
+        <p className={"text-[11.5px] capitalize leading-7 dark:text-white"}>
             {highlightText(item.text, searchInput)}
         </p>
     </div>)
