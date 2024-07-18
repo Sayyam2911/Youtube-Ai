@@ -71,7 +71,7 @@ const {extensionData, extensionLoading} = useExtension()
             setSummaryIsError(true)
             setSummaryIsGenerating(false)
             setSummaryContent(null);
-            console.log("Error Recieved at Summary Context",e);
+            console.log("Error Received at Summary Context",e);
         }
         //const summaryGenerate = generateCompletion(summaryModel.content, summaryPrompt.content, extensionData).then((response) => {console.log("response",response)})
         console.log("Port Send Request Completed")

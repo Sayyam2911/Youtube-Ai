@@ -1,5 +1,5 @@
 import {GoogleGenerativeAI} from "@google/generative-ai";
-const genAI = new GoogleGenerativeAI("AIzaSyDr47xqvHXeipm2WwsSMCOxD4d4GaiNDFU");
+const genAI = new GoogleGenerativeAI("AIzaSyDBAn1NIwh94uwHXnNDOVjvOmHvAIqyBUk");
 
 async function createCompletion(model: string, prompt: string, context: any) {
     const model1 = genAI.getGenerativeModel({ model: model});
@@ -12,6 +12,7 @@ async function createCompletion(model: string, prompt: string, context: any) {
         .replace(/[\u200B-\u200D\uFEFF]/g, "")
         .replace(/\s+/g, " ")
     const USER = `${prompt}\n\nVideo Title: ${context.metadata.title}\nVideo Transcript: ${parsed}`;
+    console.log("User", USER)
     const result = await model1.generateContent(USER);
     const response = result.response
     const text = response.text();

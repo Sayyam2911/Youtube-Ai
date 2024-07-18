@@ -1,5 +1,5 @@
 import {GoogleGenerativeAI} from "@google/generative-ai";
-const genAI = new GoogleGenerativeAI("AIzaSyDr47xqvHXeipm2WwsSMCOxD4d4GaiNDFU");
+const genAI = new GoogleGenerativeAI("AIzaSyDBAn1NIwh94uwHXnNDOVjvOmHvAIqyBUk");
 
 const SYSTEM = `
     You are a helpful assistant, Given the metadata and transcript of a YouTube video. Your primary task is to provide accurate and relevant answers to any questions based on this information. Use the available details effectively to assist users with their inquiries about the video's content, context, or any other related aspects.
@@ -11,6 +11,9 @@ const SYSTEM = `
     START OF TRANSCRIPT
     {transcript}
     END OF TRANSCRIPT
+    
+    GENERATE RESPONSE TO THE LAST QUERY/STATEMENT IN THE CHAT BASED ON CONVERSATION, METADATA, AND TRANSCRIPT.
+    START OF CHAT
 `
 
 async function createChatCompletion(model: string, messages:any, context: any) {
@@ -23,9 +26,11 @@ async function createChatCompletion(model: string, messages:any, context: any) {
         .join(" ")
         .replace(/[\u200B-\u200D\uFEFF]/g, "")
         .replace(/\s+/g, " ")
+
     const SYSTEM_WITH_CONTEXT = SYSTEM.replace("{title}", context.metadata.title).replace("{transcript}", parsed);
-    messages.unshift(SYSTEM_WITH_CONTEXT);
-    const result = await model1.generateContent(messages);
+    const messagesBody = messages.map((message: any) => message.content).join("\n");
+    const newBody = `${SYSTEM_WITH_CONTEXT}\n${messagesBody}`;
+    const result = await model1.generateContent(newBody);
     const response = result.response
     const text = response.text();
     console.log(text);
@@ -39,7 +44,8 @@ async function generateChatCompletion(model: string, messages: any, context: any
         return {message : completion, error : false}
     }
     catch(e){
-        return {message : "Getting Error from Gemini Summary Completion", error : true}
+        console.log(e)
+        return {message : "Getting Error from Gemini Chat Completion", error : true}
     }
 }
 
