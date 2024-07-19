@@ -8,7 +8,7 @@ interface ChatItemProps{
 
 export default function ChatItem({message}: ChatItemProps){
     return (
-        <div className={"group relative flex items-start px-8 py-5"}>
+        <div className={"group relative flex items-start px-8 py-2"}>
             <div className = {"flex h-10 w-10 shrink-0 select-none items-center justify-center rounded-none border border-zinc-500"}>
                 {message.role === "user" ? <IconUser/> : <IconGeminiAI/>}
             </div>

@@ -6,7 +6,7 @@ export default function SummaryContent(){
     const {summaryContent, summaryIsGenerating, generateSummary} = useSummary()
     if(!summaryContent && summaryIsGenerating){
         return (
-            <div className={"flex justify-center items-center w-full p-3 bg-white dark:bg-[#0f0f0f]"}>
+            <div className={"flex justify-center items-center w-full p-3 bg-white dark:bg-[#0f0f0f] dark:text-white"}>
                 <Button variant={'outline'} className={"w-full h-12 rounded-none focus:z-10 bg-transparent text-base border-zinc-700 flex items-center p-2"}>
                     <span className={"text-md"}>Generating Summary....</span>
                 </Button>
@@ -23,7 +23,7 @@ export default function SummaryContent(){
         )
     }
     return (
-        <div className={"flex justify-center items-center w-full p-3 bg-white dark:bg-[#0f0f0f]"}>
+        <div className={"flex justify-center items-center w-full p-3 bg-white dark:bg-[#0f0f0f] dark:text-white"}>
           <div className={"h-[550px] w-full px-3"}>
               <Markdown markdown={summaryContent} className={"pb-6"}/>
           </div>

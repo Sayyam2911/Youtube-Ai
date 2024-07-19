@@ -18,7 +18,6 @@ export default function TranscriptAction({jumpCurrentTime} : TranscriptActionPro
     const {extensionLoading, extensionData} = useExtension()
     const {isCopied, copyToClipboard} = useCopyToClipboard({timeout: 2000})
 
-
     function CopyTranscript(){
         if(isCopied || !extensionData.transcript) return
         const processed = cleanTextTranscript(extensionData.transcript)
@@ -40,6 +39,12 @@ export default function TranscriptAction({jumpCurrentTime} : TranscriptActionPro
                     setTranscriptSearch(e.currentTarget.value)
                 }}
                 disabled={extensionLoading && transcriptJSON.length === 0}
+                onKeyUp={(e) => {
+                    e.stopPropagation();
+                }}
+                onKeyDown={(e) => {
+                    e.stopPropagation();
+                }}
             />
         </div>
         <div className="flex flex-row space-x-2 dark:bg-[#0f0f0f] dark:text-white">

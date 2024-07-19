@@ -62,7 +62,7 @@ export default function PromptForm({className}: PromptFormProps){
     }, [])
 
     return (
-        <form className={cn("absolute bottom-0 z-10 p-4 w-full bg-white",className)} ref={formRef} onSubmit={async(e :any) => {
+        <form className={cn("absolute bottom-0 z-10 p-4 w-full bg-white dark:bg-[#0f0f0f] dark:text-white",className)} ref={formRef} onSubmit={async(e :any) => {
             e.preventDefault();
             if(window.innerWidth < 600){
                 e.target["message"]?.blur()
@@ -75,7 +75,7 @@ export default function PromptForm({className}: PromptFormProps){
             await generateChat(chatModel.content, [...initialMessage, {role: "user", content : value}])
         }}>
             <div
-                className={"relative flex max-h-60 w-full grow flex-col overflow-hidden rounded-none border border-zinc-500"}>
+                className={"relative flex max-h-60 w-full grow flex-col overflow-hidden rounded-none border border-zinc-500 dark:bg-[#0f0f0f] dark:text-white"}>
                 <Textarea value={chatPrompt} onChange={(e) => setChatPrompt(e.target.value)} className={
                     "min-h-[50px] w-full resize-none bg-transparent px-6 py-6 focus-within:outline-none text-[12px]"
                 }
